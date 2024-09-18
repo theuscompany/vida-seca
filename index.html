@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vidas Secas - Graciliano Ramos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-image: url('background_image_path.jpg'); /* Substitua pelo caminho da imagem de fundo */
+            background-size: cover;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: rgba(74, 144, 226, 0.8);
+            color: white;
+            padding: 20px;
+        }
+        section {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            position: relative;
+        }
+        .titulo, .subtitulo {
+            background-color: #E8F8F5;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        footer {
+            background-color: #E74C3C;
+            color: white;
+            padding: 10px;
+        }
+        .qr {
+            margin: 20px 0;
+        }
+        .button {
+            background-color: #2ECC71;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #quiz {
+            display: none;
+        }
+        .personagem {
+            display: inline-block;
+            margin: 10px;
+        }
+        .personagem img {
+            width: 100px;
+            height: auto;
+            border-radius: 50%;
+        }
+        #errorMsg {
+            color: red;
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Vidas Secas</h1>
+    <h2>Graciliano Ramos</h2>
+</header>
+
+<section>
+    <div class="titulo"><h3>A História</h3></div>
+    <p>O romance narra a vida de uma família de retirantes no sertão nordestino, enfrentando a seca e a luta pela sobrevivência. Fabiano, o protagonista, é um homem simples que vive intensamente as adversidades do sertão, lutando para sustentar sua família e manter sua dignidade.</p>
+    <p>Ele é casado com Sinhá Vitória, uma mulher forte que também carrega o peso das dificuldades. Juntos, enfrentam a escassez de alimentos e a brutalidade do clima. A história se desenrola em um cenário de desolação, onde a seca não apenas afeta a terra, mas também o espírito humano.</p>
+    <p>Os filhos, especialmente o mais novo, vivenciam a dureza da vida no sertão, e o cachorro, símbolo de lealdade, acompanha a família em sua jornada. Ao longo do livro, a luta pela sobrevivência se entrelaça com a busca por um sentido e uma identidade, refletindo a força e a resiliência do povo nordestino.</p>
+    
+    <div class="subtitulo"><h4>Personagens Principais</h4></div>
+    <div class="personagem">
+        <img src="fabiano_image_path.jpg" alt="Fabiano"> <!-- Substitua pelo caminho da imagem do Fabiano -->
+        <p>Fabiano</p>
+    </div>
+    <div class="personagem">
+        <img src="sinha_vitoria_image_path.jpg" alt="Sinhá Vitória"> <!-- Substitua pelo caminho da imagem da Sinhá Vitória -->
+        <p>Sinhá Vitória</p>
+    </div>
+    <div class="personagem">
+        <img src="cachorro_image_path.jpg" alt="Cachorro"> <!-- Substitua pelo caminho da imagem do cachorro -->
+        <p>Cachorro</p>
+    </div>
+    <div class="personagem">
+        <img src="filho_image_path.jpg" alt="Filho"> <!-- Substitua pelo caminho da imagem do filho -->
+        <p>Filho</p>
+    </div>
+    <div class="personagem">
+        <img src="sinha_mae_image_path.jpg" alt="Sinhá Mãe"> <!-- Substitua pelo caminho da imagem da Sinhá Mãe -->
+        <p>Sinhá Mãe</p>
+    </div>
+    <div class="personagem">
+        <img src="mestre_image_path.jpg" alt="Mestre"> <!-- Substitua pelo caminho da imagem do Mestre -->
+        <p>Mestre</p>
+    </div>
+
+    <button class="button" id="startQuizBtn">UM quiz para fortalecer o aprendizado</button>
+    
+    <div class="qr">
+        <p>Ajude com uma colaboração:</p>
+        <img src="path_to_qr_code_image.png" alt="QR Code" />
+    </div>
+    <div id="errorMsg">Errou!</div>
+</section>
+
+<footer>
+    <p>&copy; 2024 Vidas Secas - Todos os direitos reservados</p>
+</footer>
+
+<!-- Quiz Section -->
+<section id="quiz">
+    <h3>Quiz sobre Vidas Secas</h3>
+    <div id="question" style="font-size: 24px; margin: 20px;"></div>
+    <div id="answers"></div>
+    <button class="button" id="nextBtn" style="display:none;">Próxima Pergunta</button>
+    <button class="button" id="backBtn" style="display:none;" onclick="goBack()">Voltar ao Site</button>
+</section>
+
+<script>
+    const questions = [
+        {
+            question: "Quem é o protagonista de Vidas Secas?",
+            answers: ["Fabiano", "Zé Leite", "Rafael", "Dona Maria"],
+            correct: 0
+        },
+        {
+            question: "Qual é o nome da esposa de Fabiano?",
+            answers: ["Sinhá Vitória", "Dona Maria", "Maria", "Sinhá Mãe"],
+            correct: 0
+        },
+        {
+            question: "Qual animal é central na história?",
+            answers: ["Cavalo", "Cachorro", "Gato", "Burro"],
+            correct: 1
+        },
+        {
+            question: "Em que ambiente se passa a história?",
+            answers: ["Sertão", "Cidade", "Praia", "Floresta"],
+            correct: 0
+        },
+        {
+            question: "O que Fabiano e sua família enfrentam?",
+            answers: ["Seca", "Fogo", "Guerra", "Fome"],
+            correct: 0
+        },
+        {
+            question: "Qual é o principal tema do livro?",
+            answers: ["Sobrevivência", "Amor", "Amizade", "Esperança"],
+            correct: 0
+        },
+        {
+            question: "Quem ajuda Fabiano a aprender a ler?",
+            answers: ["O padre", "O mestre", "A filha", "O amigo"],
+            correct: 1
+        },
+        {
+            question: "Qual é o sentimento predominante em relação à terra?",
+            answers: ["Desespero", "Amor", "Indiferença", "Esperança"],
+            correct: 0
+        },
+        {
+            question: "Qual o destino final da família?",
+            answers: ["Voltar para a terra natal", "Ficar na cidade", "Migrar para o Sul", "Viver na seca"],
+            correct: 3
+        },
+        {
+            question: "Como é retratada a figura do homem do sertão?",
+            answers: ["Heroica", "Ineficiente", "Irresponsável", "Ridícula"],
+            correct: 0
+        }
+    ];
+
+    let currentQuestion = 0;
+
+    document.getElementById('startQuizBtn').onclick = function() {
+        document.querySelector('section').style.display = 'none';
+        document.getElementById('quiz').style.display = 'block';
+        showQuestion();
+    };
+
+    function showQuestion() {
+        document.getElementById('errorMsg').style.display = 'none';
+        const q = questions[currentQuestion];
+        document.getElementById('question').innerText = q.question;
+        const answersDiv = document.getElementById('answers');
+        answersDiv.innerHTML = '';
+        q.answers.forEach((answer, index) => {
+            const button = document.createElement('button');
+            button.innerText = answer;
+            button.style.fontSize = '20px';
+            button.onclick = () => checkAnswer(index);
+            answersDiv.appendChild(button);
+        });
+        document.getElementById('nextBtn').style.display = 'none';
+    }
+
+    function checkAnswer(selected) {
+        if (selected === questions[currentQuestion].correct) {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                document.getElementById('nextBtn').style.display = 'block';
+            } else {
+                alert('Você completou o quiz!');
+                document.getElementById('backBtn').style.display = 'block';
+            }
+        } else {
+            document.getElementById('errorMsg').style.display = 'block';
+        }
+        showQuestion();
+    }
+
+    function goBack() {
+        document.getElementById('quiz').style.display = 'none';
+        document.querySelector('section').style.display = 'block';
+        currentQuestion = 0; // Reinicia o quiz
+        document.getElementById('backBtn').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
